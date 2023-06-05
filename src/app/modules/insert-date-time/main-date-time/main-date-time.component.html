@@ -1,8 +1,15 @@
 <form [formGroup]="timeForm" class="time-form">
-  <mat-form-field appearance="outline">
-    <input type="text" matInput formControlName="time" [ngxMatTimepicker]="picker" placeholder="Час">
-    <ngx-mat-timepicker #picker></ngx-mat-timepicker>
-  </mat-form-field>
+  <div class="time-range-selection">
+    <mat-form-field appearance="outline" class="sleep-time">
+      <input type="text" matInput formControlName="sleep" [ngxMatTimepicker]="sleep" placeholder="Заснув">
+      <ngx-mat-timepicker #sleep></ngx-mat-timepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="awake-time">
+      <input type="text" matInput formControlName="awake" [ngxMatTimepicker]="awake" placeholder="Прокинувся">
+      <ngx-mat-timepicker #awake></ngx-mat-timepicker>
+    </mat-form-field>
+  </div>
 
   <mat-form-field appearance="outline">
     <input matInput formControlName="date" [matDatepicker]="datepicker" placeholder="Дата">
@@ -15,12 +22,5 @@
     <mat-checkbox color="primary" formControlName="currentDay">Сьогодні</mat-checkbox>
   </section>
 
-  <div class="sleep-wake-up-actions">
-    <button mat-fab color="primary" (click)="sumbit()" [disabled]="submitDisabled">
-      <mat-icon>dark_mode</mat-icon>
-    </button>
-    <button mat-fab color="accent" (click)="sumbit()" [disabled]="submitDisabled">
-      <mat-icon>child_care</mat-icon>
-    </button>
-  </div>
+  <button mat-raised-button color="primary" (click)="sumbit()" [disabled]="submitDisabled">Підтвердити</button>
 </form>

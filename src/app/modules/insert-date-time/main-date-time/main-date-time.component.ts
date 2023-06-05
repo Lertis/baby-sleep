@@ -2,6 +2,8 @@ import { Component } from '@angular/core'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { FormControl, FormGroup } from '@angular/forms'
 
+import * as moment from 'moment'
+
 
 @Component({
   selector: 'app-main-date-time',
@@ -10,20 +12,28 @@ import { FormControl, FormGroup } from '@angular/forms'
 })
 export class MainDateTimeComponent {
   timeForm = new FormGroup({
-    time: new FormControl<string | null>(''),
+    sleep: new FormControl<string | null>(''),
+    awake: new FormControl<string | null>(''),
     date: new FormControl<Date | null>({ disabled: true, value: new Date() }),
     currentDay: new FormControl(true),
   })
 
   get submitDisabled (): boolean {
-    const { date, time } = { ...this.timeForm.getRawValue() as { date: Date | null, time: string | null } }
-    return Object.values({ date, time }).filter(v => Boolean(v)).length < 2
+    const { date, sleep, awake } = { ...this.getFormValues() }
+    const payload = { date, sleep, awake }
+    return Object.values(payload).filter(v => Boolean(v)).length < Object.keys(payload).length
   }
+
+  private readonly getFormValues = (): { date: Date | null, sleep: string | null, awake: string | null } => this.timeForm.getRawValue()
 
   private readonly getC = (c: 'time' | 'date' | 'currentDay'): FormControl => this.timeForm.get(c) as FormControl
 
   constructor () {
     this.initcurrentDaySubscription()
+  }
+
+  hourSelected (e: any) {
+    console.log(e)
   }
 
   private initcurrentDaySubscription (): void {
@@ -40,6 +50,17 @@ export class MainDateTimeComponent {
   }
 
   sumbit () {
+    const { sleep, awake, date } = { ...this.getFormValues() }
+    let payload: { date?: string, start?: string, end?: string } = { date: '', start: '', end: '' }
+    if (sleep && awake) {
+      payload = {
+        ...payload,
+        date: moment(date).format('YYYY-MM-DD'),
+        start: sleep.replace(/AM|PM/, '').trim(),
+        end: awake.replace(/AM|PM/, '').trim()
+      }
+    }
+    console.log(payload)
     this.timeForm.reset()
   }
 }

@@ -7,9 +7,14 @@
     flex-direction: column;
     gap: 2em;
     width: 65vw;
-    .sleep-wake-up-actions {
+    .time-range-selection {
       display: flex;
-      justify-content: space-evenly;
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 2em;
+      .sleep-time, .awake-time {
+        flex: 1 1 auto;
+      }
     }
   }
 }
