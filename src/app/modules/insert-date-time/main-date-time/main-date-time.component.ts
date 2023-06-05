@@ -2,7 +2,7 @@ import { Component } from '@angular/core'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { FormControl, FormGroup } from '@angular/forms'
 
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid'
 import * as moment from 'moment'
 
 
@@ -27,7 +27,7 @@ export class MainDateTimeComponent {
 
   private readonly getFormValues = (): { date: Date | null, sleep: string | null, awake: string | null } => this.timeForm.getRawValue()
 
-  private readonly getC = (c: 'time' | 'date' | 'currentDay'): FormControl => this.timeForm.get(c) as FormControl
+  private readonly getC = (c: 'sleep' | 'awake' | 'date' | 'currentDay'): FormControl => this.timeForm.get(c) as FormControl
 
   constructor () {
     this.initcurrentDaySubscription()
