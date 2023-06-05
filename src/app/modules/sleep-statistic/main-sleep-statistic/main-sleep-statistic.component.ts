@@ -29,6 +29,8 @@ export class MainSleepStatisticComponent {
 
   mostFrequentSleepHours: SleepHourProbability[] = []
 
+  readonly trackByFn = (i: number, _: SleepHourProbability) => i
+
   constructor (
     @Inject(DOCUMENT) private readonly document: Document,
     @Self() private readonly sleepCalendarService: SleepCalendarService) {

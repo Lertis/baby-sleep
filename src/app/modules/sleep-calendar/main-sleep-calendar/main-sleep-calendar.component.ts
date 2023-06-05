@@ -27,6 +27,8 @@ export class MainSleepCalendarComponent implements OnInit, AfterViewInit, OnDest
 
   @ViewChild(MatCalendar) calendar!: MatCalendar<Date>
 
+  readonly trackByFn = (_: number, item: SleepPeriod) => item.uuid
+
   constructor (
     @Self() private readonly sleepCalendarService: SleepCalendarService,
     private readonly dialog: MatDialog) {

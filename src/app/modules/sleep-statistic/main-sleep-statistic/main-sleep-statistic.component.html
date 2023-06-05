@@ -14,7 +14,7 @@
       <mat-spinner [diameter]="18"></mat-spinner>
     </ng-template>
     <ng-template [ngIf]="!loading">
-      <ng-container *ngFor="let item of mostFrequentSleepHours">
+      <ng-container *ngFor="let item of mostFrequentSleepHours; trackBy: trackByFn">
         <div>
           О <strong>{{ item.hour }}</strong> годині ймовірність сну: <strong>{{ item.probability / 100 | percent: '1.2'}}</strong>
         </div>
