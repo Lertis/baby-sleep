@@ -1,8 +1,21 @@
-<main>
-  <nav>
-    <button mat-raised-button color="primary" [routerLink]="path.DATE_TIME">DATE TIME</button>
-    <button mat-raised-button color="primary" [routerLink]="path.SLEEP_CALENDAR">CALENDAR</button>
-    <button mat-raised-button color="primary" [routerLink]="path.STATISTIC">STATISTIC</button>
-  </nav>
-  <router-outlet></router-outlet>
-</main>
+<div class="main-container" [ngClass]="{ 'is-mobile': mobileQuery.matches }">
+  <mat-toolbar color="primary" class="main-toolbar">
+    <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+    <h1 class="app-name">Сон Сашка</h1>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="main-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56">
+      <nav class="nav-bar">
+        <button mat-raised-button color="primary" [routerLink]="path.DATE_TIME" (click)="snav.toggle()">Дата й час</button>
+        <button mat-raised-button color="primary" [routerLink]="path.SLEEP_CALENDAR" (click)="snav.toggle()">Календар сну</button>
+        <button mat-raised-button color="primary" [routerLink]="path.STATISTIC" (click)="snav.toggle()">Статистика</button>
+      </nav>
+    </mat-sidenav>
+
+    <main class="main">
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-container>
+</div>

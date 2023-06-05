@@ -1,0 +1,37 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.is-mobile .main-toolbar {
+  position: fixed;
+  z-index: 2;
+}
+
+h1.app-name {
+  margin-left: 8px;
+}
+
+.main-sidenav-container {
+  flex: 1;
+}
+
+.is-mobile .main-sidenav-container {
+  flex: 1 0 auto;
+}
+
+.nav-bar {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 20px;
+  gap: 20px;
+}
+
+.main {
+  pad: 1em;
+}

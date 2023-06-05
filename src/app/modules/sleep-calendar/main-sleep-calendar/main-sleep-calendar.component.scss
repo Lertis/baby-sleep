@@ -1,3 +1,7 @@
-.sleep-calendar {
-  width: 80vw;
+.sleep-calendar-wrap {
+  display: grid;
+  place-items: center;
+  .sleep-calendar {
+    width: 80vw;
+  }
 }

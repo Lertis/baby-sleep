@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop'
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { FormControl, FormGroup } from '@angular/forms'
 
 
@@ -9,10 +9,9 @@ import { FormControl, FormGroup } from '@angular/forms'
   styleUrls: ['./main-date-time.component.scss']
 })
 export class MainDateTimeComponent {
-
   timeForm = new FormGroup({
     time: new FormControl<string | null>(''),
-    date: new FormControl<Date | null>({ disabled: true, value: null }),
+    date: new FormControl<Date | null>({ disabled: true, value: new Date() }),
     currentDay: new FormControl(true),
   })
 
