@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, Self, ViewChild } from '@angular/core'
+import { AfterViewInit, Component, OnDestroy, OnInit, Self, ViewChild } from '@angular/core'
 import { MatCalendar } from '@angular/material/datepicker'
 import { MatDialog } from '@angular/material/dialog'
 
@@ -16,7 +16,7 @@ import { EditSleepItemComponent } from '../edit-sleep-item/edit-sleep-item.compo
   styleUrls: ['./main-sleep-calendar.component.scss'],
   providers: [SleepCalendarService]
 })
-export class MainSleepCalendarComponent implements AfterViewInit, OnDestroy {
+export class MainSleepCalendarComponent implements OnInit, AfterViewInit, OnDestroy {
   private readonly destroy$ = new Subject<void>()
 
   selected!: Date | null
@@ -30,6 +30,20 @@ export class MainSleepCalendarComponent implements AfterViewInit, OnDestroy {
   constructor (
     @Self() private readonly sleepCalendarService: SleepCalendarService,
     private readonly dialog: MatDialog) {
+  }
+
+  ngOnInit (): void {
+    const date = new Date()
+    this.selected = date
+    this.loading = true
+    this.sleepCalendarService.getPreviewForDay(date).pipe(
+      takeUntil(this.destroy$),
+      delay(1500)
+    ).subscribe(values => {
+      this.sleepStatisticByDay = [...values]
+      this.loading = false
+      this.calendar.updateTodaysDate()
+    })
   }
 
   ngAfterViewInit (): void {
