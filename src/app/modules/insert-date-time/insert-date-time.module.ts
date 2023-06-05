@@ -2,16 +2,16 @@ import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { RouterModule, Routes } from '@angular/router'
 
-import { MainDateTimeWrapComponent } from './main-date-time-wrap/main-date-time-wrap.component'
+import { MainDateTimeComponent } from './main-date-time/main-date-time.component'
 
 const routes: Routes = [
   {
     path: '',
-    component: MainDateTimeWrapComponent
+    component: MainDateTimeComponent
   }
 ]
 
-const COMPONENTS = [MainDateTimeWrapComponent]
+const COMPONENTS = [MainDateTimeComponent]
 
 const ANGULAR = [
   CommonModule,
