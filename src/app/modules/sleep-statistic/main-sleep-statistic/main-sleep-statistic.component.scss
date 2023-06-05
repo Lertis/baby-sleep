@@ -1,0 +1,11 @@
+.main-sleep-statistic {
+  display: grid;
+  place-items: center;
+  margin: 2em;
+  .statistic-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 20px 0;
+  }
+}

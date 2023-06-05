@@ -1,4 +1,4 @@
-<div>
+<div class="main-sleep-statistic">
   <mat-form-field>
     <mat-label>Month and Year</mat-label>
     <input matInput [matDatepicker]="dp" [formControl]="date">
@@ -8,4 +8,17 @@
       panelClass="example-month-picker">
     </mat-datepicker>
   </mat-form-field>
+
+  <div class="statistic-list">
+    <ng-template [ngIf]="loading">
+      <mat-spinner [diameter]="18"></mat-spinner>
+    </ng-template>
+    <ng-template [ngIf]="!loading">
+      <ng-container *ngFor="let item of mostFrequentSleepHours">
+        <div>
+          О <strong>{{ item.hour }}</strong> годині ймовірність сну: <strong>{{ item.probability / 100 | percent: '1.2'}}</strong>
+        </div>
+      </ng-container>
+    </ng-template>
+  </div>
 </div>

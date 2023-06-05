@@ -9,9 +9,8 @@
     width: 65vw;
     .time-range-selection {
       display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      gap: 2em;
+      flex-direction: column;
+      gap: 1em;
       .sleep-time, .awake-time {
         flex: 1 1 auto;
       }

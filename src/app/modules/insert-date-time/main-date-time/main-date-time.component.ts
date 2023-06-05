@@ -2,6 +2,7 @@ import { Component } from '@angular/core'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { FormControl, FormGroup } from '@angular/forms'
 
+import { v4 as uuidv4 } from 'uuid';
 import * as moment from 'moment'
 
 
@@ -51,10 +52,11 @@ export class MainDateTimeComponent {
 
   sumbit () {
     const { sleep, awake, date } = { ...this.getFormValues() }
-    let payload: { date?: string, start?: string, end?: string } = { date: '', start: '', end: '' }
+    let payload: { uuid: string, date?: string, start?: string, end?: string } = { uuid: '', date: '', start: '', end: '' }
     if (sleep && awake) {
       payload = {
         ...payload,
+        uuid: uuidv4(),
         date: moment(date).format('YYYY-MM-DD'),
         start: sleep.replace(/AM|PM/, '').trim(),
         end: awake.replace(/AM|PM/, '').trim()

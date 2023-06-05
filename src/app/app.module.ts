@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { HttpClientModule } from '@angular/common/http'
 
 import { MAT_RIPPLE_GLOBAL_OPTIONS } from '@angular/material/core'
 
@@ -13,6 +14,7 @@ const ANGULAR = [
   BrowserModule,
   AppRoutingModule,
   BrowserAnimationsModule,
+  HttpClientModule
 ]
 
 @NgModule({
