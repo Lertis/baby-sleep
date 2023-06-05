@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { EditDateTime, SleepPeriod } from '@model'
+import * as moment from 'moment'
 
 @Component({
   selector: 'app-edit-sleep-item',
@@ -17,12 +18,13 @@ export class EditSleepItemComponent {
     this.values = { sleep: start, awake: end, date: new Date(date), currentDay: true }
   }
 
-  valueChange (value: {
-    awake: string | null
-    currentDay: boolean | null
-    date: Date | null
-    sleep: string | null
-  }) {
-    console.log(value)
+  valueChange (value: EditDateTime): void {
+    const payload: SleepPeriod = {
+      uuid: this.data.uuid,
+      date: moment(value.date).format('YYYY-MM-DD'),
+      start: (value.sleep as string).replace(/AM|PM/, '').trim(),
+      end: (value.awake as string).replace(/AM|PM/, '').trim()
+    }
+    this.dialogRef.close(payload)
   }
 }

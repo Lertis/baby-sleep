@@ -20,9 +20,11 @@ export class SleepCalendarService {
       map(values => values.filter(({ date }) => moment(date).month() === month))
     )
 
+  readonly saveSleepInfo = (payload: SleepPeriod): Observable<SleepPeriod> =>
+    this.http.post<SleepPeriod>('path/to-create', { payload })
+
   readonly editSleepInfo = (payload: SleepPeriod): Observable<SleepPeriod> =>
     this.http.put<SleepPeriod>('path/to-update', { payload })
-
 
   readonly deleteSleepInfo = (payload: SleepPeriod): Observable<SleepPeriod> =>
     this.http.delete<SleepPeriod>('path/to-delete', { body: { payload } })

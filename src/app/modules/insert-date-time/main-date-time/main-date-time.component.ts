@@ -1,5 +1,6 @@
-import { Component } from '@angular/core'
+import { Component, Self } from '@angular/core'
 
+import { SleepCalendarService } from '@service'
 import { SleepPeriod, EditDateTime } from '@model'
 
 import { v4 as uuidv4 } from 'uuid'
@@ -8,9 +9,13 @@ import * as moment from 'moment'
 @Component({
   selector: 'app-main-date-time',
   templateUrl: './main-date-time.component.html',
-  styleUrls: ['./main-date-time.component.scss']
+  styleUrls: ['./main-date-time.component.scss'],
+  providers: [SleepCalendarService]
 })
 export class MainDateTimeComponent {
+
+  constructor (@Self() private readonly sleepCalendarService: SleepCalendarService) { }
+
   editDateTimeValueChange (value: EditDateTime) {
     const { sleep, awake, date } = { ...value }
     let payload: SleepPeriod = { uuid: '', date: '', start: '', end: '' }
@@ -23,6 +28,6 @@ export class MainDateTimeComponent {
         end: awake.replace(/AM|PM/, '').trim()
       }
     }
-    console.log(payload)
+    this.sleepCalendarService.saveSleepInfo(payload)
   }
 }

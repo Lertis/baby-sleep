@@ -46,12 +46,12 @@ export class MainSleepCalendarComponent implements AfterViewInit, OnDestroy {
   }
 
   editItem (item: SleepPeriod): void {
-    this.dialog.open(EditSleepItemComponent, {
+    this.dialog.open<EditSleepItemComponent, SleepPeriod, SleepPeriod>(EditSleepItemComponent, {
       data: { ...item }
     }).afterClosed().pipe(
       filter(v => Boolean(v))
-    ).subscribe(() => {
-      console.log('Edit aciton')
+    ).subscribe((payload: SleepPeriod) => {
+      this.sleepCalendarService.editSleepInfo(payload) // change with using switchMap
     })
   }
 
@@ -61,7 +61,7 @@ export class MainSleepCalendarComponent implements AfterViewInit, OnDestroy {
     }).afterClosed().pipe(
       filter(v => Boolean(v))
     ).subscribe(() => {
-      console.log('Delete aciton')
+      this.sleepCalendarService.deleteSleepInfo(item) // change with using switchMap
     })
   }
 
