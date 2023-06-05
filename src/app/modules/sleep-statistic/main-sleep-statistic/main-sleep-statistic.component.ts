@@ -6,10 +6,10 @@ import { MatDatepicker } from '@angular/material/datepicker'
 
 import { delay, map, switchMap, tap } from 'rxjs'
 
-import { calculateMostFrequentSleepHours } from '../../../utils/statistic'
-import { momentCalendarAdapters } from '../../../shared'
-import { SleepCalendarService } from '../../../services'
-import { SleepHourProbability } from '../../../models'
+import { calculateMostFrequentSleepHours } from '@util'
+import { momentCalendarAdapters } from '@shared'
+import { SleepCalendarService } from '@service'
+import { SleepHourProbability } from '@model'
 
 import * as moment from 'moment'
 

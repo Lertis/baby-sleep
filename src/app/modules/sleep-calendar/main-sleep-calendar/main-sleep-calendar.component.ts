@@ -2,9 +2,8 @@ import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core'
 import { MatCalendar } from '@angular/material/datepicker'
 import { Subject, delay, filter, switchMap, takeUntil, tap } from 'rxjs'
 
-import { SleepCalendarService } from '../../../services'
-
-import { SleepPeriod } from '../../../models'
+import { SleepCalendarService } from '@service'
+import { SleepPeriod } from '@model'
 
 @Component({
   selector: 'app-main-sleep-calendar',

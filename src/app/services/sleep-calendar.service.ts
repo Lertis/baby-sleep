@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { map } from 'rxjs'
 
-import { SleepPeriod } from '../models'
+import { SleepPeriod } from '@model'
 
 import * as moment from 'moment'
 

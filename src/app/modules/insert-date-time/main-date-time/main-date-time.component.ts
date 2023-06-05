@@ -33,10 +33,6 @@ export class MainDateTimeComponent {
     this.initcurrentDaySubscription()
   }
 
-  hourSelected (e: any) {
-    console.log(e)
-  }
-
   private initcurrentDaySubscription (): void {
     this.getC('currentDay').valueChanges.pipe(
       takeUntilDestroyed()
