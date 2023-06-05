@@ -1,1 +1,8 @@
-<router-outlet></router-outlet>
+<main>
+  <nav>
+    <div [routerLink]="path.DATE_TIME">date time</div>
+    <div [routerLink]="path.SLEEP_CALENDAR">calendar</div>
+    <div [routerLink]="path.STATISTIC">statistic</div>
+  </nav>
+  <router-outlet></router-outlet>
+</main>
