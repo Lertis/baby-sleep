@@ -7,5 +7,9 @@
     flex-direction: column;
     gap: 2em;
     width: 65vw;
+    .sleep-wake-up-actions {
+      display: flex;
+      justify-content: space-evenly;
+    }
   }
 }

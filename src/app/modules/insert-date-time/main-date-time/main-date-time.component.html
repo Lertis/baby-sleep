@@ -15,5 +15,12 @@
     <mat-checkbox color="primary" formControlName="currentDay">Сьогодні</mat-checkbox>
   </section>
 
-  <button mat-raised-button color="primary" (click)="sumbit()" [disabled]="submitDisabled">Підтвердити</button>
+  <div class="sleep-wake-up-actions">
+    <button mat-fab color="primary" (click)="sumbit()" [disabled]="submitDisabled">
+      <mat-icon>dark_mode</mat-icon>
+    </button>
+    <button mat-fab color="accent" (click)="sumbit()" [disabled]="submitDisabled">
+      <mat-icon>child_care</mat-icon>
+    </button>
+  </div>
 </form>
