@@ -1,8 +1,8 @@
 <main>
   <nav>
-    <div [routerLink]="path.DATE_TIME">date time</div>
-    <div [routerLink]="path.SLEEP_CALENDAR">calendar</div>
-    <div [routerLink]="path.STATISTIC">statistic</div>
+    <button mat-raised-button color="primary" [routerLink]="path.DATE_TIME">DATE TIME</button>
+    <button mat-raised-button color="primary" [routerLink]="path.SLEEP_CALENDAR">CALENDAR</button>
+    <button mat-raised-button color="primary" [routerLink]="path.STATISTIC">STATISTIC</button>
   </nav>
   <router-outlet></router-outlet>
 </main>

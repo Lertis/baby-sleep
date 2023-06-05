@@ -3,16 +3,11 @@ import { CommonModule } from '@angular/common'
 import { RouterModule, Routes } from '@angular/router'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
-import { MatNativeDateModule } from '@angular/material/core'
-import { MatInputModule } from '@angular/material/input'
-import { MatFormFieldModule } from '@angular/material/form-field'
-import { MatDatepickerModule } from '@angular/material/datepicker'
-import { MatIconModule } from '@angular/material/icon'
-import { MatCheckboxModule } from '@angular/material/checkbox'
-import { MatButtonModule } from '@angular/material/button'
 import { NgxMatTimepickerModule } from 'ngx-mat-timepicker'
 
 import { MainDateTimeComponent } from './main-date-time/main-date-time.component'
+
+import { MATERIAL } from './material.module'
 
 const routes: Routes = [
   {
@@ -32,16 +27,6 @@ const ANGULAR = [
 
 const LIBS = [
   NgxMatTimepickerModule
-]
-
-const MATERIAL = [
-  MatInputModule,
-  MatFormFieldModule,
-  MatNativeDateModule,
-  MatDatepickerModule,
-  MatIconModule,
-  MatCheckboxModule,
-  MatButtonModule
 ]
 
 @NgModule({
