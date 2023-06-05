@@ -1,11 +1,14 @@
 import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core'
 import { MatCalendar } from '@angular/material/datepicker'
+import { MatDialog } from '@angular/material/dialog'
+
 import { Subject, delay, filter, switchMap, takeUntil, tap } from 'rxjs'
 
 import { SleepCalendarService } from '@service'
 import { SleepPeriod } from '@model'
-import { MatDialog } from '@angular/material/dialog'
-import { ConfirmDialogComponent } from '../../../shared/confirm-dialog/confirm-dialog.component'
+import { ConfirmDialogComponent } from '@shared'
+
+import { EditSleepItemComponent } from '../edit-sleep-item/edit-sleep-item.component'
 
 @Component({
   selector: 'app-main-sleep-calendar',
@@ -41,7 +44,17 @@ export class MainSleepCalendarComponent implements AfterViewInit, OnDestroy {
     })
   }
 
-  deleteItem (item: SleepPeriod) {
+  editItem (item: SleepPeriod): void {
+    this.dialog.open(EditSleepItemComponent, {
+      data: { ...item }
+    }).afterClosed().pipe(
+      filter(v => Boolean(v))
+    ).subscribe(() => {
+      console.log('Edit aciton')
+    })
+  }
+
+  deleteItem (item: SleepPeriod): void {
     this.dialog.open(ConfirmDialogComponent, {
       data: { text: 'Ви впевнені?' }, width: '50vw', height: '20vh'
     }).afterClosed().pipe(

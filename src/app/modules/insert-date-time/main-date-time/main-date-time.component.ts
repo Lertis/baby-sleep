@@ -1,8 +1,9 @@
 import { Component } from '@angular/core'
 
+import { SleepPeriod, EditDateTime } from '@model'
+
 import { v4 as uuidv4 } from 'uuid'
 import * as moment from 'moment'
-
 
 @Component({
   selector: 'app-main-date-time',
@@ -10,15 +11,9 @@ import * as moment from 'moment'
   styleUrls: ['./main-date-time.component.scss']
 })
 export class MainDateTimeComponent {
-  values = {
-    sleep: new Date().toString(),
-    date: new Date('2022-09-02').toString(),
-    currentDay: true
-  }
-
-  editDateTimeValueChange (value: { date: Date | null, sleep: string | null, awake: string | null, currentDay: boolean | null }) {
+  editDateTimeValueChange (value: EditDateTime) {
     const { sleep, awake, date } = { ...value }
-    let payload: { uuid: string, date?: string, start?: string, end?: string } = { uuid: '', date: '', start: '', end: '' }
+    let payload: SleepPeriod = { uuid: '', date: '', start: '', end: '' }
     if (sleep && awake) {
       payload = {
         ...payload,

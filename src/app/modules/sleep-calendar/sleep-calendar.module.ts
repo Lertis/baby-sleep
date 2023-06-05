@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common'
 import { RouterModule, Routes } from '@angular/router'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
-import { MainSleepCalendarComponent } from './main-sleep-calendar/main-sleep-calendar.component'
+import { EditDateTimeModule, ConfirmDialogModule } from '@shared'
 
 import { MATERIAL } from './material.module'
-import { ConfirmDialogModule } from '../../shared/confirm-dialog/confirm-dialog.module'
+
+import { MainSleepCalendarComponent } from './main-sleep-calendar/main-sleep-calendar.component'
+import { EditSleepItemComponent } from './edit-sleep-item/edit-sleep-item.component'
 
 const routes: Routes = [
   {
@@ -15,7 +17,7 @@ const routes: Routes = [
   }
 ]
 
-const COMPONENTS = [MainSleepCalendarComponent]
+const COMPONENTS = [MainSleepCalendarComponent, EditSleepItemComponent]
 
 const ANGULAR = [
   CommonModule,
@@ -25,7 +27,8 @@ const ANGULAR = [
 ]
 
 const LIBS = [
-  ConfirmDialogModule
+  ConfirmDialogModule,
+  EditDateTimeModule
 ]
 
 @NgModule({

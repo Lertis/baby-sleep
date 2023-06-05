@@ -2,25 +2,17 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChange } from 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { FormGroup, FormControl } from '@angular/forms'
 
+import { EditDateTime } from '@model'
+
 @Component({
   selector: 'app-edit-date-time',
   templateUrl: './edit-date-time.component.html',
   styleUrls: ['./edit-date-time.component.scss']
 })
 export class EditDateTimeComponent implements OnChanges {
-  @Input() values!: {
-    sleep?: string | null
-    awake?: string | null
-    date?: string | null
-    currentDay?: boolean
-  }
+  @Input() values!: EditDateTime
 
-  @Output() valueChange = new EventEmitter<{
-    sleep: string | null
-    awake: string | null
-    date: Date | null
-    currentDay: boolean | null
-  }>()
+  @Output() valueChange = new EventEmitter<EditDateTime>()
 
   timeForm = new FormGroup<{
     sleep: FormControl<string | null>
@@ -39,7 +31,7 @@ export class EditDateTimeComponent implements OnChanges {
     return Object.values({ date, sleep, awake }).filter(v => Boolean(v)).length < Object.keys({ date, sleep, awake }).length
   }
 
-  private readonly getFormValues = (): { date: Date | null, sleep: string | null, awake: string | null, currentDay: boolean | null } => this.timeForm.getRawValue()
+  private readonly getFormValues = (): EditDateTime => this.timeForm.getRawValue()
 
   constructor () {
     this.initcurrentDaySubscription()
@@ -48,24 +40,10 @@ export class EditDateTimeComponent implements OnChanges {
   ngOnChanges (changes: { values: SimpleChange }): void {
     const { values } = { ...changes }
     if (values?.currentValue) {
-      const { sleep, awake, date } = { ...values.currentValue as { sleep: string | null, awake: string | null, date: string | null, } }
-      if (sleep) {
-        const dSleep = new Date(`${sleep}`)
-        const hSleep = dSleep.getHours()
-        const mSleep = dSleep.getMinutes()
-        this.timeForm.controls.sleep.setValue(`${hSleep}:${mSleep}`)
-      }
-
-      if (awake) {
-        const dAwake = new Date(`${awake}`)
-        const hAwake = dAwake.getHours()
-        const mAwake = dAwake.getMinutes()
-        this.timeForm.controls.awake.setValue(`${hAwake}:${mAwake}`)
-      }
-
-      if (date) {
-        this.timeForm.controls.date.setValue(new Date(`${date}`))
-      }
+      const { sleep, awake, date } = { ...values.currentValue as EditDateTime }
+      sleep && this.timeForm.controls.sleep.setValue(sleep)
+      awake && this.timeForm.controls.awake.setValue(awake)
+      date && this.timeForm.controls.date.setValue(new Date(`${date}`))
     }
   }
 
