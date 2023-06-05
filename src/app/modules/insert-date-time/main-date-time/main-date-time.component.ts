@@ -12,7 +12,12 @@ import * as moment from 'moment'
   styleUrls: ['./main-date-time.component.scss']
 })
 export class MainDateTimeComponent {
-  timeForm = new FormGroup({
+  timeForm = new FormGroup<{
+    sleep: FormControl<string | null>
+    awake: FormControl<string | null>
+    date: FormControl<Date | null>
+    currentDay: FormControl<boolean | null>
+  }>({
     sleep: new FormControl<string | null>(''),
     awake: new FormControl<string | null>(''),
     date: new FormControl<Date | null>({ disabled: true, value: new Date() }),
@@ -21,27 +26,24 @@ export class MainDateTimeComponent {
 
   get submitDisabled (): boolean {
     const { date, sleep, awake } = { ...this.getFormValues() }
-    const payload = { date, sleep, awake }
-    return Object.values(payload).filter(v => Boolean(v)).length < Object.keys(payload).length
+    return Object.values({ date, sleep, awake }).filter(v => Boolean(v)).length < Object.keys({ date, sleep, awake }).length
   }
 
   private readonly getFormValues = (): { date: Date | null, sleep: string | null, awake: string | null } => this.timeForm.getRawValue()
-
-  private readonly getC = (c: 'sleep' | 'awake' | 'date' | 'currentDay'): FormControl => this.timeForm.get(c) as FormControl
 
   constructor () {
     this.initcurrentDaySubscription()
   }
 
   private initcurrentDaySubscription (): void {
-    this.getC('currentDay').valueChanges.pipe(
+    this.timeForm.controls.currentDay.valueChanges.pipe(
       takeUntilDestroyed()
     ).subscribe(v => {
       if (v) {
-        this.getC('date').disable()
-        this.getC('date').setValue(new Date())
+        this.timeForm.controls.date.disable()
+        this.timeForm.controls.date.setValue(new Date())
       } else {
-        this.getC('date').enable()
+        this.timeForm.controls.date.enable()
       }
     })
   }
