@@ -9,8 +9,8 @@ import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatIconModule } from '@angular/material/icon'
 import { MatCheckboxModule } from '@angular/material/checkbox'
-import {MatButtonModule} from '@angular/material/button';
-import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker'
+import { MatButtonModule } from '@angular/material/button'
+import { NgxMatTimepickerModule } from 'ngx-mat-timepicker'
 
 import { MainDateTimeComponent } from './main-date-time/main-date-time.component'
 
@@ -31,7 +31,7 @@ const ANGULAR = [
 ]
 
 const LIBS = [
-  NgxMaterialTimepickerModule
+  NgxMatTimepickerModule
 ]
 
 const MATERIAL = [

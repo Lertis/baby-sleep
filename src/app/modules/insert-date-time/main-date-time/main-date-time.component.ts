@@ -1,23 +1,23 @@
-import { Component, OnDestroy } from '@angular/core'
+import { Component } from '@angular/core'
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop'
 import { FormControl, FormGroup } from '@angular/forms'
-import { Subject, takeUntil } from 'rxjs'
+
 
 @Component({
   selector: 'app-main-date-time',
   templateUrl: './main-date-time.component.html',
   styleUrls: ['./main-date-time.component.scss']
 })
-export class MainDateTimeComponent implements OnDestroy {
-  private readonly destroy$ = new Subject<void>()
+export class MainDateTimeComponent {
 
   timeForm = new FormGroup({
-    time: new FormControl(''),
-    date: new FormControl({ disabled: true, value: '' }),
+    time: new FormControl<string | null>(''),
+    date: new FormControl<Date | null>({ disabled: true, value: null }),
     currentDay: new FormControl(true),
   })
 
   get submitDisabled (): boolean {
-    const { date, time } = { ...this.timeForm.getRawValue() as { date: Date, time: string } }
+    const { date, time } = { ...this.timeForm.getRawValue() as { date: Date | null, time: string | null } }
     return Object.values({ date, time }).filter(v => Boolean(v)).length < 2
   }
 
@@ -29,7 +29,7 @@ export class MainDateTimeComponent implements OnDestroy {
 
   private initcurrentDaySubscription (): void {
     this.getC('currentDay').valueChanges.pipe(
-      takeUntil(this.destroy$)
+      takeUntilDestroyed()
     ).subscribe(v => {
       if (v) {
         this.getC('date').disable()
@@ -42,10 +42,5 @@ export class MainDateTimeComponent implements OnDestroy {
 
   sumbit () {
     this.timeForm.reset()
-  }
-
-  ngOnDestroy (): void {
-    this.destroy$.next()
-    this.destroy$.complete()
   }
 }
