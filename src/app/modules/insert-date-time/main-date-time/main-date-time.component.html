@@ -1,1 +1,19 @@
-<p>main-date-time-wrap works!</p>
+<form [formGroup]="timeForm">
+  <mat-form-field>
+    <input type="text" matInput formControlName="time" [ngxTimepicker]="picker" placeholder="Time">
+    <ngx-material-timepicker #picker></ngx-material-timepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput formControlName="date" [matDatepicker]="datepicker" placeholder="Date">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconPrefix [for]="datepicker"></mat-datepicker-toggle>
+    <mat-datepicker #datepicker></mat-datepicker>
+  </mat-form-field>
+
+  <section>
+    <mat-checkbox color="primary" formControlName="currentDay">Current day</mat-checkbox>
+  </section>
+
+  <button mat-raised-button color="primary" (click)="sumbit()" [disabled]="submitDisabled">Sumbit</button>
+</form>
