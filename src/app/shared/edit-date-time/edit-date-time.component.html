@@ -1,0 +1,26 @@
+<form [formGroup]="timeForm" class="time-form">
+  <div class="time-range-selection">
+    <mat-form-field appearance="outline" class="sleep-time">
+      <input type="text" matInput formControlName="sleep" [ngxMatTimepicker]="sleep" placeholder="Заснув">
+      <ngx-mat-timepicker #sleep></ngx-mat-timepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="awake-time">
+      <input type="text" matInput formControlName="awake" [ngxMatTimepicker]="awake" placeholder="Прокинувся">
+      <ngx-mat-timepicker #awake></ngx-mat-timepicker>
+    </mat-form-field>
+  </div>
+
+  <mat-form-field appearance="outline">
+    <input matInput formControlName="date" [matDatepicker]="datepicker" placeholder="Дата">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconPrefix [for]="datepicker"></mat-datepicker-toggle>
+    <mat-datepicker #datepicker></mat-datepicker>
+  </mat-form-field>
+
+  <section>
+    <mat-checkbox color="primary" formControlName="currentDay">Сьогодні</mat-checkbox>
+  </section>
+
+  <button mat-raised-button color="primary" (click)="sumbit()" [disabled]="submitDisabled">Підтвердити</button>
+</form>

@@ -2,14 +2,23 @@
   <div class="sleep-calendar-wrap">
     <mat-calendar class="sleep-calendar" [(selected)]="selected"></mat-calendar>
   </div>
-  <div class="sleep-items" [ngStyle]="{ 'grid-template-columns': loading ? '1fr' : '1fr 1fr' }">
+  <div class="sleep-items">
     <ng-template [ngIf]="loading">
       <mat-spinner [diameter]="18"></mat-spinner>
     </ng-template>
     <ng-template [ngIf]="!loading">
       <div *ngFor="let item of sleepStatisticByDay" class="item">
-        Сон: [{{ item.start }} - {{ item.end }}]
+        <div>Сон: [{{ item.start }} - {{ item.end }}]</div>
+        <div>
+          <button mat-icon-button color="primary">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteItem(item)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
       </div>
+
     </ng-template>
   </div>
 </div>

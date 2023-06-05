@@ -4,6 +4,8 @@ import { Subject, delay, filter, switchMap, takeUntil, tap } from 'rxjs'
 
 import { SleepCalendarService } from '@service'
 import { SleepPeriod } from '@model'
+import { MatDialog } from '@angular/material/dialog'
+import { ConfirmDialogComponent } from '../../../shared/confirm-dialog/confirm-dialog.component'
 
 @Component({
   selector: 'app-main-sleep-calendar',
@@ -21,7 +23,10 @@ export class MainSleepCalendarComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild(MatCalendar) calendar!: MatCalendar<Date>
 
-  constructor(private readonly sleepCalendarService: SleepCalendarService) {}
+  constructor (
+    private readonly sleepCalendarService: SleepCalendarService,
+    private readonly dialog: MatDialog) {
+  }
 
   ngAfterViewInit (): void {
     this.calendar.selectedChange.pipe(
@@ -33,6 +38,16 @@ export class MainSleepCalendarComponent implements AfterViewInit, OnDestroy {
     ).subscribe(values => {
       this.sleepStatisticByDay = [...values]
       this.loading = false
+    })
+  }
+
+  deleteItem (item: SleepPeriod) {
+    this.dialog.open(ConfirmDialogComponent, {
+      data: { text: 'Ви впевнені?' }, width: '50vw', height: '20vh'
+    }).afterClosed().pipe(
+      filter(v => Boolean(v))
+    ).subscribe(() => {
+      console.log('Delete aciton')
     })
   }
 

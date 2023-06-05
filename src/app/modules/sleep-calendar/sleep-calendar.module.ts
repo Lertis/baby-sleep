@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { MainSleepCalendarComponent } from './main-sleep-calendar/main-sleep-calendar.component'
 
 import { MATERIAL } from './material.module'
+import { ConfirmDialogModule } from '../../shared/confirm-dialog/confirm-dialog.module'
 
 const routes: Routes = [
   {
@@ -23,8 +24,12 @@ const ANGULAR = [
   ReactiveFormsModule
 ]
 
+const LIBS = [
+  ConfirmDialogModule
+]
+
 @NgModule({
   declarations: [...COMPONENTS],
-  imports: [...ANGULAR, ...MATERIAL]
+  imports: [...ANGULAR, ...MATERIAL, ...LIBS]
 })
 export class SleepCalendarModule { }
