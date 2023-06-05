@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core'
+import { Component, Inject, Self } from '@angular/core'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { DOCUMENT } from '@angular/common'
 import { FormControl } from '@angular/forms'
@@ -18,7 +18,8 @@ import * as moment from 'moment'
   templateUrl: './main-sleep-statistic.component.html',
   styleUrls: ['./main-sleep-statistic.component.scss'],
   providers: [
-    ...momentCalendarAdapters()
+    ...momentCalendarAdapters(),
+    SleepCalendarService
   ]
 })
 export class MainSleepStatisticComponent {
@@ -30,7 +31,7 @@ export class MainSleepStatisticComponent {
 
   constructor (
     @Inject(DOCUMENT) private readonly document: Document,
-    private readonly sleepCalendarService: SleepCalendarService) {
+    @Self() private readonly sleepCalendarService: SleepCalendarService) {
     this.calendarChangeSubscription()
     this.date.setValue(moment(new Date()), { emitEvent: true })
   }

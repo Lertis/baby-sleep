@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core'
+import { AfterViewInit, Component, OnDestroy, Self, ViewChild } from '@angular/core'
 import { MatCalendar } from '@angular/material/datepicker'
 import { MatDialog } from '@angular/material/dialog'
 
@@ -13,7 +13,8 @@ import { EditSleepItemComponent } from '../edit-sleep-item/edit-sleep-item.compo
 @Component({
   selector: 'app-main-sleep-calendar',
   templateUrl: './main-sleep-calendar.component.html',
-  styleUrls: ['./main-sleep-calendar.component.scss']
+  styleUrls: ['./main-sleep-calendar.component.scss'],
+  providers: [SleepCalendarService]
 })
 export class MainSleepCalendarComponent implements AfterViewInit, OnDestroy {
   private readonly destroy$ = new Subject<void>()
@@ -27,7 +28,7 @@ export class MainSleepCalendarComponent implements AfterViewInit, OnDestroy {
   @ViewChild(MatCalendar) calendar!: MatCalendar<Date>
 
   constructor (
-    private readonly sleepCalendarService: SleepCalendarService,
+    @Self() private readonly sleepCalendarService: SleepCalendarService,
     private readonly dialog: MatDialog) {
   }
 
