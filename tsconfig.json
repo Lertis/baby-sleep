@@ -35,6 +35,12 @@
       ],
       "@service": [
         "src/app/services/index.ts"
+      ],
+      "@token": [
+        "src/app/tokens/index.ts"
+      ],
+      "@const": [
+        "src/app/const/index.ts"
       ]
     }
   },

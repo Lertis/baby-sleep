@@ -1,7 +1,7 @@
-import { Component, Self } from '@angular/core'
+import { Component, SkipSelf, Inject } from '@angular/core'
 
-import { SleepCalendarService } from '@service'
-import { SleepPeriod, EditDateTime } from '@model'
+import { SleepPeriod, EditDateTime, ILocalStorage } from '@model'
+import { LOCAL_STORAGE_SERVICE } from '@token'
 
 import { v4 as uuidv4 } from 'uuid'
 import * as moment from 'moment'
@@ -9,14 +9,15 @@ import * as moment from 'moment'
 @Component({
   selector: 'app-main-date-time',
   templateUrl: './main-date-time.component.html',
-  styleUrls: ['./main-date-time.component.scss'],
-  providers: [SleepCalendarService]
+  styleUrls: ['./main-date-time.component.scss']
 })
 export class MainDateTimeComponent {
 
-  constructor (@Self() private readonly sleepCalendarService: SleepCalendarService) { }
+  constructor (
+    @SkipSelf() @Inject(LOCAL_STORAGE_SERVICE) private readonly localStorageService: ILocalStorage
+  ) { }
 
-  editDateTimeValueChange (value: EditDateTime) {
+  editDateTimeValueChange (value: EditDateTime): void {
     const { sleep, awake, date } = { ...value }
     let payload: SleepPeriod = { uuid: '', date: '', start: '', end: '' }
     if (sleep && awake) {
@@ -28,6 +29,8 @@ export class MainDateTimeComponent {
         end: awake.replace(/AM|PM/, '').trim()
       }
     }
-    this.sleepCalendarService.saveSleepInfo(payload)
+    const all: SleepPeriod[] = this.localStorageService.getParsedItems() as SleepPeriod[]
+    all.push(payload)
+    this.localStorageService.setItem(all)
   }
 }

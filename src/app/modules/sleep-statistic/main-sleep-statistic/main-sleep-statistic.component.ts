@@ -38,14 +38,14 @@ export class MainSleepStatisticComponent {
     this.date.setValue(moment(new Date()), { emitEvent: true })
   }
 
-  openedCalendar () {
+  openedCalendar (): void {
     const ctrlValue = this.date.value
     ctrlValue.year(new Date().getFullYear())
     this.date.setValue(ctrlValue)
     setTimeout(() => (this.document.getElementsByClassName('mat-calendar-body-active')[0] as HTMLButtonElement).click())
   }
 
-  setMonthAndYear (normalizedMonthAndYear: moment.Moment, datepicker: MatDatepicker<moment.Moment>) {
+  setMonthAndYear (normalizedMonthAndYear: moment.Moment, datepicker: MatDatepicker<moment.Moment>): void {
     const ctrlValue = this.date.value
     ctrlValue.month(normalizedMonthAndYear.month())
     ctrlValue.year(normalizedMonthAndYear.year())

@@ -9,6 +9,7 @@ import { MATERIAL } from './material.module'
 
 import { MainSleepCalendarComponent } from './main-sleep-calendar/main-sleep-calendar.component'
 import { EditSleepItemComponent } from './edit-sleep-item/edit-sleep-item.component'
+import { ActiveTimePipe } from './active-time.pipe'
 
 const routes: Routes = [
   {
@@ -18,6 +19,8 @@ const routes: Routes = [
 ]
 
 const COMPONENTS = [MainSleepCalendarComponent, EditSleepItemComponent]
+
+const PIPES = [ActiveTimePipe]
 
 const ANGULAR = [
   CommonModule,
@@ -32,7 +35,7 @@ const LIBS = [
 ]
 
 @NgModule({
-  declarations: [...COMPONENTS],
+  declarations: [...COMPONENTS, ...PIPES],
   imports: [...ANGULAR, ...MATERIAL, ...LIBS]
 })
 export class SleepCalendarModule { }

@@ -22,8 +22,8 @@ export class EditSleepItemComponent {
     const payload: SleepPeriod = {
       uuid: this.data.uuid,
       date: moment(value.date).format('YYYY-MM-DD'),
-      start: (value.sleep as string).replace(/AM|PM/, '').trim(),
-      end: (value.awake as string).replace(/AM|PM/, '').trim()
+      start: value.sleep.replace(/AM|PM/, '').trim(),
+      end: value.awake.replace(/AM|PM/, '').trim()
     }
     this.dialogRef.close(payload)
   }

@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core'
 import { MediaMatcher } from '@angular/cdk/layout'
 
-import { RoutePath } from './const'
+import { RoutePath } from '@const'
 
 @Component({
   selector: 'app-root',
@@ -14,13 +14,16 @@ export class AppComponent implements OnDestroy {
   mobileQuery: MediaQueryList
   path = RoutePath
 
-  constructor (changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
-    this.mobileQuery = media.matchMedia('(max-width: 600px)')
-    this._mobileQueryListener = () => changeDetectorRef.detectChanges()
+  constructor (
+    private readonly cdr: ChangeDetectorRef,
+    private readonly media: MediaMatcher
+  ) {
+    this.mobileQuery = this.media.matchMedia('(max-width: 600px)')
+    this._mobileQueryListener = () => this.cdr.detectChanges()
     this.mobileQuery.addEventListener('change', this._mobileQueryListener)
   }
 
-  ngOnDestroy(): void {
-    this.mobileQuery.removeEventListener('change', this._mobileQueryListener);
+  ngOnDestroy (): void {
+    this.mobileQuery.removeEventListener('change', this._mobileQueryListener)
   }
 }

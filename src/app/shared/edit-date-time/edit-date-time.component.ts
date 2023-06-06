@@ -47,7 +47,6 @@ export class EditDateTimeComponent implements OnChanges {
     }
   }
 
-
   private initcurrentDaySubscription (): void {
     this.timeForm.controls.currentDay.valueChanges.pipe(
       takeUntilDestroyed()
@@ -63,6 +62,6 @@ export class EditDateTimeComponent implements OnChanges {
 
   sumbit (): void {
     this.valueChange.emit(this.getFormValues())
-    this.timeForm.reset()
+    this.timeForm.reset({ currentDay: true, date: new Date() })
   }
 }

@@ -7,16 +7,22 @@
       <mat-spinner [diameter]="18"></mat-spinner>
     </ng-template>
     <ng-template [ngIf]="!loading">
-      <div *ngFor="let item of sleepStatisticByDay; trackBy: trackByFn" class="item">
-        <div>Сон: [{{ item.start }} - {{ item.end }}]</div>
-        <div>
-          <button mat-icon-button color="primary" (click)="editItem(item)">
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button mat-icon-button color="warn" (click)="deleteItem(item)">
-            <mat-icon>delete</mat-icon>
-          </button>
+      <div *ngFor="let item of sleepStatisticByDay; let i = index; trackBy: trackByFn" class="list">
+        <div class="item-sleep">
+          <div>Час сну: [{{ item.start }} - {{ item.end }}]</div>
+          <div>
+            <button mat-icon-button color="primary" (click)="editItem(item)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="deleteItem(item)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
         </div>
+
+        <ng-container *ngIf="(i + 1) !== sleepStatisticByDay.length">
+          <div class="item-active">Активний: {{ item | activeTime: i : sleepStatisticByDay }} </div>
+        </ng-container>
       </div>
     </ng-template>
   </div>

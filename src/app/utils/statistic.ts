@@ -1,8 +1,13 @@
 import { SleepHourProbability, SleepPeriod } from '../models'
 
-function convertTimeToHours (time: string): number {
+export function convertTimeToHours (time: string): number {
   const [hours] = time.split(':').map(Number)
   return hours
+}
+
+export function convertTimeToMinutes (time: string): number {
+  const [_, minutes] = time.split(':').map(Number)
+  return minutes
 }
 
 

@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { HttpClientModule } from '@angular/common/http'
+
+import { LOCAL_STORAGE_SERVICE, LOCAL_STORAGE_TOKEN } from '@token'
+import { SleepLocalStorageService } from '@service'
 
 import { MAT_RIPPLE_GLOBAL_OPTIONS } from '@angular/material/core'
 
@@ -13,8 +15,7 @@ import { MATERIAL } from './material.module'
 const ANGULAR = [
   BrowserModule,
   AppRoutingModule,
-  BrowserAnimationsModule,
-  HttpClientModule
+  BrowserAnimationsModule
 ]
 
 @NgModule({
@@ -26,6 +27,14 @@ const ANGULAR = [
     {
       provide: MAT_RIPPLE_GLOBAL_OPTIONS,
       useValue: { disabled: true }
+    },
+    {
+      provide: LOCAL_STORAGE_TOKEN,
+      useValue: 'sleep'
+    },
+    {
+      provide: LOCAL_STORAGE_SERVICE,
+      useClass: SleepLocalStorageService
     }
   ],
   bootstrap: [AppComponent]

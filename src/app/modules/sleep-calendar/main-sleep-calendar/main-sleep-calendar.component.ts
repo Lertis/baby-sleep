@@ -1,14 +1,15 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, Self, ViewChild } from '@angular/core'
+import { AfterViewInit, Component, OnDestroy, OnInit, Self, SkipSelf, ViewChild, Inject } from '@angular/core'
 import { MatCalendar } from '@angular/material/datepicker'
 import { MatDialog } from '@angular/material/dialog'
 
 import { Subject, delay, filter, switchMap, takeUntil, tap } from 'rxjs'
 
 import { SleepCalendarService } from '@service'
-import { SleepPeriod } from '@model'
+import { ILocalStorage, SleepPeriod } from '@model'
 import { ConfirmDialogComponent } from '@shared'
 
 import { EditSleepItemComponent } from '../edit-sleep-item/edit-sleep-item.component'
+import { LOCAL_STORAGE_SERVICE } from '../../../tokens'
 
 @Component({
   selector: 'app-main-sleep-calendar',
@@ -27,10 +28,11 @@ export class MainSleepCalendarComponent implements OnInit, AfterViewInit, OnDest
 
   @ViewChild(MatCalendar) calendar!: MatCalendar<Date>
 
-  readonly trackByFn = (_: number, item: SleepPeriod) => item.uuid
+  readonly trackByFn = (_: number, item: SleepPeriod): string => item.uuid
 
   constructor (
     @Self() private readonly sleepCalendarService: SleepCalendarService,
+    @SkipSelf() @Inject(LOCAL_STORAGE_SERVICE) private readonly localStorageService: ILocalStorage,
     private readonly dialog: MatDialog) {
   }
 
@@ -67,7 +69,7 @@ export class MainSleepCalendarComponent implements OnInit, AfterViewInit, OnDest
     }).afterClosed().pipe(
       filter(v => Boolean(v))
     ).subscribe((payload: SleepPeriod) => {
-      this.sleepCalendarService.editSleepInfo(payload) // change with using switchMap
+
     })
   }
 
@@ -77,7 +79,7 @@ export class MainSleepCalendarComponent implements OnInit, AfterViewInit, OnDest
     }).afterClosed().pipe(
       filter(v => Boolean(v))
     ).subscribe(() => {
-      this.sleepCalendarService.deleteSleepInfo(item) // change with using switchMap
+
     })
   }
 
