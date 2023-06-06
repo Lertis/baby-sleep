@@ -2,6 +2,7 @@ import { Component, SkipSelf, Inject } from '@angular/core'
 
 import { SleepPeriod, EditDateTime, ILocalStorage } from '@model'
 import { LOCAL_STORAGE_SERVICE } from '@token'
+import { SnackBarService } from '@service'
 
 import { v4 as uuidv4 } from 'uuid'
 import * as moment from 'moment'
@@ -14,7 +15,8 @@ import * as moment from 'moment'
 export class MainDateTimeComponent {
 
   constructor (
-    @SkipSelf() @Inject(LOCAL_STORAGE_SERVICE) private readonly localStorageService: ILocalStorage
+    @SkipSelf() @Inject(LOCAL_STORAGE_SERVICE) private readonly localStorageService: ILocalStorage,
+    private readonly snackBarService: SnackBarService
   ) { }
 
   editDateTimeValueChange (value: EditDateTime): void {
@@ -32,5 +34,6 @@ export class MainDateTimeComponent {
     const all: SleepPeriod[] = this.localStorageService.getParsedItems() as SleepPeriod[]
     all.push(payload)
     this.localStorageService.setItem(all)
+    this.snackBarService.showMessage('Успішно додано!')
   }
 }

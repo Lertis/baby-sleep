@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router'
 import { EditDateTimeModule } from '@shared'
 
 import { MainDateTimeComponent } from './main-date-time/main-date-time.component'
+import { MATERIAL } from './material.module'
 
 const routes: Routes = [
   {
@@ -26,6 +27,6 @@ const LIBS = [
 
 @NgModule({
   declarations: [...COMPONENTS],
-  imports: [...ANGULAR, ...LIBS]
+  imports: [...ANGULAR, ...LIBS, ...MATERIAL]
 })
 export class InsertDateTimeModule { }
